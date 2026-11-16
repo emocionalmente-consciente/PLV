@@ -19,6 +19,7 @@ import { ProfileDetail } from '../features/profiles/ProfileDetail';
 import { ProfilesPage } from '../features/profiles/ProfilesPage';
 import { HistoryPage } from '../features/results/HistoryPage';
 import { ProtocolPage } from '../features/results/ProtocolPage';
+import { InfographicPage } from '../features/results/InfographicPage';
 import { ReportPage } from '../features/results/ReportPage';
 import { tokenFromHash } from '../invitations/token';
 import { AppContext } from './context';
@@ -121,6 +122,7 @@ function OperatorApp() {
             <Route path="/examinados/:examineeId/sesion/nueva" element={<SessionForm />} />
             <Route path="/examinados/:examineeId/invitacion" element={<InvitationForm />} />
             <Route path="/sesiones/:sessionId" element={<ReportPage />} />
+            <Route path="/sesiones/:sessionId/infografia" element={<InfographicPage />} />
             <Route path="/sesiones/:sessionId/protocolo" element={<ProtocolPage />} />
             <Route path="/sesiones/:sessionId/grafica" element={<ChartPage />} />
             <Route path="/sesiones/:sessionId/color" element={<ColorEntry />} />

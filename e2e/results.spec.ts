@@ -285,3 +285,26 @@ test('the printed report ends with the protocol and the chart, unless turned off
   await page.emulateMedia({ media: 'print' });
   expect(pageCount(await page.pdf({ format: 'A4', printBackground: true }))).toBe(withExtras - 2);
 });
+
+test('the infographic summarizes the P4 report and prints a follow-up plan', async ({ page }) => {
+  await start(page);
+  await colorAndCi(page);
+  await page.getByRole('link', { name: 'Infografía' }).click();
+  await expect(page.getByRole('heading', { name: 'Ana Núñez' })).toBeVisible();
+  await expect(page.locator('.ig-pill')).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Perfil intelectual/ })).toBeVisible();
+  await expect(page.getByRole('list', { name: 'Rasgos laborales' }).getByRole('listitem')).toHaveCount(9);
+  await expect(page.getByRole('list', { name: 'Inteligencia emocional' }).getByRole('listitem')).toHaveCount(5);
+  await expect(page.getByRole('heading', { name: /Plan de seguimiento/ })).toBeVisible();
+
+  await page.emulateMedia({ media: 'print' });
+  const pdf = await page.pdf({ format: 'A4', printBackground: true });
+  if (process.env.INFOGRAPHIC_PDF) (await import('node:fs')).writeFileSync(process.env.INFOGRAPHIC_PDF, pdf);
+  expect(pageCount(pdf)).toBeGreaterThanOrEqual(2);
+});
+
+test('the infographic is not offered for a C.E. session', async ({ page }) => {
+  await start(page);
+  await ceSession(page);
+  await expect(page.getByRole('link', { name: 'Infografía' })).toHaveCount(0);
+});

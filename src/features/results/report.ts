@@ -72,7 +72,7 @@ function traitsWithCode(pack: OperatorPack, scores: readonly Score[], matches: (
     .map((score) => traitBlock(pack, score));
 }
 
-function ciBlock(record: SessionRecord): ReportBlock | null {
+export function ciBlock(record: SessionRecord): Extract<ReportBlock, { type: 'ci' }> | null {
   if (!record.session.instruments.ci) return null;
   const valueOf = (traitId: string): number => record.scores?.find((s) => s.traitId === traitId)?.value ?? 0;
   const rawTotal = (record.itemAnswers ?? []).filter((a) => a.itemId.startsWith('ci:')).reduce((sum, a) => sum + a.points, 0);

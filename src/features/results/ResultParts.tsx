@@ -64,6 +64,11 @@ export function ResultNav({ result }: { result: Result }) {
         <NavLink end to={base} className="button secondary">
           Informe
         </NavLink>
+        {moduleOf(session) === 'p4' && (
+          <NavLink to={`${base}/infografia`} className="button secondary">
+            Infografía
+          </NavLink>
+        )}
         {colorResult && (
           <NavLink to={`${base}/protocolo`} className="button secondary">
             Protocolo

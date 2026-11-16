@@ -147,3 +147,37 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Playwright
+test-results/
+playwright-report/
+
+# Local files
+.DS_Store
+Thumbs.db
+*.local
+
+# Restricted content. tools/check-forbidden.mjs is what enforces this in CI,
+# and it also catches files that were force-added past these rules.
+*.[dD][aA][tT]
+*.[bB][lL][bB]
+*.[iI][dD][xX]
+*.[dD][tT][fF]
+*.[eE][xX][eE]
+*.[pP][dD][fF]
+*.[bB][mM][pP]
+*.[rR][tT][fF]
+*.[dD][oO][cC]
+*.psivpack
+*.psivbackup
+*.psivrespuesta
+*.pack
+*.pack.*
+!public/demo/**
+oracle/
+export/
+export-restricted/
+psiv-private/
+
+# Claude Code local settings
+.claude/
